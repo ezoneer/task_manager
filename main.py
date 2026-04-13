@@ -9,6 +9,7 @@ from repositories.user_repository import UsersRepository
 from routes.tasks import router as tasks_router
 from routes.users import router as users_router
 from fastapi.security import OAuth2PasswordBearer
+from starlette.middleware.cors import CORSMiddleware
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
@@ -26,9 +27,22 @@ app.add_middleware(ProcessTimeMiddleware)
 app.include_router(users_router)
 app.include_router(tasks_router, dependencies=[Depends(oauth2_scheme)])
 
-
 UserRepoDep = Annotated[UsersRepository, Depends()]
 
+origins = [
+    "http://localhost:63342",
+    "http://127.0.0.1:63342",
+    "http://127.0.0.1:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 if __name__ == '__main__':
-    print("Запуск сервера на http://127.0.0.1:8080")
-    uvicorn.run(app, host="127.0.0.1", port=8080)
+    print("Запуск сервера на http://localhost:8080")
+    uvicorn.run(app, host="localhost", port=8080)

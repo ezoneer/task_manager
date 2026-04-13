@@ -3,7 +3,7 @@ from starlette.exceptions import HTTPException
 
 from repositories.task_repository import TaskRepository
 from repositories.user_repository import UsersRepository
-from sсhemas.task_schemas import TaskUpdateDTO, TaskAddDTO
+from schemas.task_schemas import TaskUpdateDTO, TaskAddDTO
 
 
 class TaskService:

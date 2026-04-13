@@ -13,7 +13,7 @@ from config import settings
 from pydantic import EmailStr
 
 from repositories.user_repository import UsersRepository
-from sсhemas.schemas import SUserRegister
+from schemas.schemas import SUserRegister
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -23,7 +23,6 @@ def get_password_hash(password: str) -> str:
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
-
 
 
 class AuthService:
@@ -45,7 +44,7 @@ class AuthService:
 
         return await self.user_repo.add_user(user_dict)
 
-    async def authenticate_user(self, email: str, password: str):
+    async def authenticate_user(self, email: str | EmailStr, password: str):
         user = await self.user_repo.get_user_by_email(email=str(email))
 
         if not user or not verify_password(password, str(user.password)):
@@ -54,25 +53,7 @@ class AuthService:
                 detail='Неверная почта или пароль'
             )
 
-        tokens = self.create_tokens(user_id=int(user.id), role=str(user.role))
-
-        self.response.set_cookie(
-            key="users_access_token",
-            value=tokens["access_token"],
-            httponly=True
-        )
-        self.response.set_cookie(
-            key="users_refresh_token",
-            value=tokens["refresh_token"],
-            httponly=True,
-            path="/auth/refresh"
-        )
-
-        return {
-            "message": "Аутентификация пройдена успешно!",
-            "access_token": tokens["access_token"],
-            "refresh_token": tokens["refresh_token"]
-        }
+        return self.create_tokens(user_id=int(user.id), role=str(user.role))
 
     @staticmethod
     def create_tokens(user_id: int, role: str):
@@ -90,10 +71,4 @@ class AuthService:
             settings.JWT_SECRET, algorithm=settings.ALGORITHM
         )
         return {"access_token": access_token, "refresh_token": refresh_token}
-
-    def logout_user(self):
-        self.response.delete_cookie(key="users_access_token")
-        self.response.delete_cookie(key="users_refresh_token")
-
-        return {"message": "Токены сброшены, сессия окончена"}
 

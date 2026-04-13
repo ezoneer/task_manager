@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from database import DatabaseStorageDep
 from dependencies import get_current_user
 from models import UsersModel
-from sсhemas.task_schemas import TaskAddDTO, TaskUpdateDTO
+from schemas.task_schemas import TaskAddDTO, TaskUpdateDTO
 from services.task_service import TaskService
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
