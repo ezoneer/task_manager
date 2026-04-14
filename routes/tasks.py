@@ -10,9 +10,9 @@ router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 @router.post("/add")
 async def add_task_handler(
-        task: TaskAddDTO,
-        db: DatabaseStorageDep,
-        current_user: Annotated[UsersModel, Depends(get_current_user)]
+    task: TaskAddDTO,
+    db: DatabaseStorageDep,
+    current_user: Annotated[UsersModel, Depends(get_current_user)]
 ):
     service = TaskService(db)
     return await service.add_task(task, user_id = current_user.id)
@@ -40,8 +40,9 @@ async def updated_task(
 
 @router.delete("/delete/{task_id}")
 async def deleted_task(
-        task_id: int,
-        current_user: Annotated[UsersModel, Depends(get_current_user)],
-        db: DatabaseStorageDep):
+    task_id: int,
+    current_user: Annotated[UsersModel, Depends(get_current_user)],
+    db: DatabaseStorageDep
+):
     service = TaskService(db)
     return await service.delete_task(task_id, user_id=current_user.id)

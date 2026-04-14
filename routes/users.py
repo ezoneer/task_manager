@@ -16,7 +16,10 @@ AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
 
 
 @router.post("/register/")
-async def register_user(user_data: SUserRegister, auth_service: AuthServiceDep):
+async def register_user(
+    user_data: SUserRegister,
+    auth_service: AuthServiceDep
+):
     return await auth_service.register_new_user(user_data=user_data)
 
 

@@ -1,0 +1,275 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #020617;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  color: #f8fafc;
+}
+
+#app {
+  width: 100%;
+  max-width: 800px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary:hover {
+  background: #6366f1;
+  transform: scale(1.02);
+}
+
+.tasks-container {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.tasks-header {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+}
+
+.tasks-header h2 {
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.badge-count {
+  margin-left: 0.75rem;
+  background: rgba(255,255,255,0.1);
+  padding: 0.1rem 0.6rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.task-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  padding: 1.1rem 1.2rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+}
+
+.task-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: scale(1.01);
+}
+
+.task-card.completed {
+  opacity: 0.7;
+}
+
+.task-card.completed .card-title {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.card-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.priority-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.priority-high {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.priority-medium {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+}
+
+.priority-low {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.checkbox-wrapper input {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  accent-color: #4f46e5;
+}
+
+.card-desc {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.btn-delete {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.btn-delete:hover {
+  background: rgba(239, 68, 68, 0.35);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 1.8rem;
+  border-radius: 1.8rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal h3 {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal input, .modal select {
+  width: 100%;
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+}
+
+.modal input:focus, .modal select:focus {
+  border-color: #6366f1;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.btn-modal-save {
+  background: #4f46e5;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1rem;
+  color: white;
+  flex: 2;
+  cursor: pointer;
+}
+
+.btn-modal-cancel {
+  background: transparent;
+  border: 1px solid #334155;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  color: #cbd5e1;
+  flex: 1;
+  cursor: pointer;
+}
+
+.empty-message, .loading, .error-message {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}

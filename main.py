@@ -8,11 +8,7 @@ from models import Base
 from repositories.user_repository import UsersRepository
 from routes.tasks import router as tasks_router
 from routes.users import router as users_router
-from fastapi.security import OAuth2PasswordBearer
 from starlette.middleware.cors import CORSMiddleware
-
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 
 @asynccontextmanager
@@ -25,7 +21,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(ProcessTimeMiddleware)
 app.include_router(users_router)
-app.include_router(tasks_router, dependencies=[Depends(oauth2_scheme)])
+app.include_router(tasks_router)
 
 UserRepoDep = Annotated[UsersRepository, Depends()]
 
