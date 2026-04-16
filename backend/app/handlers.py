@@ -6,9 +6,9 @@ from aiogram.types import Message
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 
-import app.keyboards as kb
+import backend.app.keyboards as kb
 from service import TaskService
-from texts import TEXT_START
+from backend.texts import TEXT_START
 
 router = Router()
 

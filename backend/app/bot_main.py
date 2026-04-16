@@ -1,8 +1,8 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config import settings
-from app.handlers import router
+from backend.config import settings
+from backend.app.handlers import router
 
 
 async def main():

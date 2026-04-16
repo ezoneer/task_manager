@@ -1,6 +1,6 @@
 from typing import List, Optional
-from schemas.user_schemas import UserDTO
-from schemas.task_schemas import TaskDTO
+from user_schemas import UserDTO
+from task_schemas import TaskDTO
 
 class UserRelDTO(UserDTO):
     tasks: List[TaskDTO] = []

@@ -1,10 +1,9 @@
 from fastapi import Request, HTTPException, status, Depends
 import jwt
-from datetime import datetime, timezone
 
-from config import settings
-from database import DatabaseStorageDep
-from repositories.user_repository import UsersRepository
+from backend.config import settings
+from backend.database import DatabaseStorageDep
+from backend.repositories.user_repository import UsersRepository
 
 
 def get_token(request: Request):

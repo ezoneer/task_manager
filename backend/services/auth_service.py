@@ -1,9 +1,6 @@
-from typing import Annotated
-
 import jwt
 from datetime import datetime, timedelta, timezone
 
-from fastapi import Depends
 from passlib.context import CryptContext
 from starlette import status
 from starlette.exceptions import HTTPException
