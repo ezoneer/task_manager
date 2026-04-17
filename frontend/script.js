@@ -1,5 +1,4 @@
-// КОНФИГ
-const API_BASE = 'http://localhost:8080';
+const API_BASE = '/api';
 
 // СОСТОЯНИЕ
 let tasks = [];
@@ -132,7 +131,7 @@ async function loadTasks() {
   error = null;
   render();
   try {
-    tasks = await api.getTasks();
+    tasks = await api.getTasks() || [];
   } catch (e) {
     error = e.message;
   } finally {
@@ -149,7 +148,6 @@ async function handleCreate(taskData) {
       description: taskData.description || '',
       priority: taskData.priority
     });
-    // Вместо пуша — просто перезагружаем все задачи
     await loadTasks();
   } catch (e) {
     alert('Failed: ' + e.message);
@@ -159,7 +157,7 @@ async function handleCreate(taskData) {
 async function handleUpdate(taskId, updates) {
   try {
     await api.updateTask(taskId, updates);
-    await loadTasks(); // Перезагружаем вместо ручного map
+    await loadTasks();
   } catch (e) {
     alert('Failed: ' + e.message);
   }
@@ -169,7 +167,7 @@ async function handleDelete(taskId) {
   if (!confirm('Delete?')) return;
   try {
     await api.deleteTask(taskId);
-    await loadTasks(); // Перезагружаем
+    await loadTasks();
   } catch (e) {
     alert('Failed: ' + e.message);
   }
@@ -330,6 +328,7 @@ function renderTaskCard(task) {
   return card;
 }
 
+// РЕНДЕР МОДАЛКИ
 function renderModal() {
   if (!modal.open) return null;
 
