@@ -15,7 +15,7 @@ async def get_auth_service(response: Response, repo: Annotated[UsersRepository, 
 AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
 
 
-@router.post("/register/")
+@router.post("/register")
 async def register_user(
     user_data: SUserRegister,
     auth_service: AuthServiceDep
