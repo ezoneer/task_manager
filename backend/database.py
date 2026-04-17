@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
-from backend.config import settings
+from config import settings
 
 from fastapi import Depends
 from typing import Annotated, AsyncGenerator
